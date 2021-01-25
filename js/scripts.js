@@ -1,6 +1,12 @@
 // Business Logic for List
 function List() {
   this.tasks = {};
+  this.currentId = 0;
+}
+
+List.prototype.assignId = function() {
+  this.currentId += 1;
+  return this.currentId
 }
 
 List.prototype.addTask = function(task) {
@@ -8,9 +14,12 @@ List.prototype.addTask = function(task) {
   this.tasks[task.id] = task;
 }
 
-List.prototype.assignId = function() {
-  this.currentId += 1;
-  return this.currentId
+List.prototype.deleteTask = function(id) {
+  if (this.tasks[id] === undefined) {
+    return false;
+  }
+  delete this.tasks[id];
+  return true;
 }
 
 // Businss Logic for Tasks
